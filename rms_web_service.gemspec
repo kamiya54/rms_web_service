@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["kamiya54@gmail.com"]
   spec.summary       = %q{Ruby wrapper for RMS Web Service.}
   spec.description   = %q{Ruby wrapper for RMS Web Service.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/kamiya54/rms_web_service"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "faraday", "~> 0.9.0"
-  spec.add_dependency "nokogiri", "~> 1.6.2"
+  spec.add_dependency "faraday"
+  spec.add_dependency "nokogiri"
   spec.add_dependency "activesupport"
 
   spec.add_development_dependency "bundler", "~> 1.6"
