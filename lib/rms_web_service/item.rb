@@ -23,6 +23,11 @@ module RmsWebService
       def endpoint(method)
         return Endpoint + method
       end
+
+      def get(args)
+        request = connection('item/get').get {|req| req.params['itemUrl'] = args[:item_url]}
+        return Get.new(request.body)
+      end
     end
   end
 end
