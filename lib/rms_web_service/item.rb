@@ -12,15 +12,17 @@ require 'rms_web_service/item/items_update'
 
 module RmsWebService
   class Item
-    def self.connection(method)
-      connection = Faraday.new(:url => endpoint(method)) do |c|
-        c.adapter Faraday.default_adapter
-        c.headers['Authorization'] = RmsWebService.configuration.encoded_keys
+    class << self
+      def connection(method)
+        connection = Faraday.new(:url => endpoint(method)) do |c|
+          c.adapter Faraday.default_adapter
+          c.headers['Authorization'] = RmsWebService.configuration.encoded_keys
+        end
       end
-    end
 
-    def self.endpoint(method)
-      return Endpoint + method
+      def endpoint(method)
+        return Endpoint + method
+      end
     end
   end
 end
