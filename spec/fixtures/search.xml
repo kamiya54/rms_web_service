@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+  <status>
+    <interfaceId>item.search</interfaceId>
+    <systemStatus>OK</systemStatus>
+    <message>OK</message>
+    <requestId>714a4983-555f-42d9-aeea-89dae89f2f55</requestId>
+    <requests>
+      <itemUrl>aaa</itemUrl>
+    </requests>
+  </status>
+  <itemSearchResult>
+    <code>200-00</code>
+    <numFound>10<numFound>
+    <items><item><itemUrl>aaa</itemUrl><itemPrice>10000</itemPrice></item><item><itemUrl>bbb</itemUrl><itemPrice>20000</itemPrice></item><item><itemUrl>ccc</itemUrl><itemPrice>30000</itemPrice></item></items>
+  </itemSearchResult>
+</result>

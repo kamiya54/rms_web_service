@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+    <status>
+        <interfaceId>item.get</interfaceId>
+        <systemStatus>OK</systemStatus>
+        <message>OK</message>
+        <requestId>714a4983-555f-42d9-aeea-89dae89f2f55</requestId>
+        <requests>
+            <itemUrl>aaa</itemUrl>
+        </requests>
+    </status>
+    <itemGetResult>
+        <code>N000</code>
+        <item>
+            <itemUrl>aaa</itemUrl>
+            ・
+            ・
+            ・
+        </item>
+    </itemGetResult>
+</result>

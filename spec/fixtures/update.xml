@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+  <status>
+    <interfaceId>item.update</interfaceId>
+    <systemStatus>OK/NG</systemStatus>
+    <message>message</message>
+    <requestId>UUID</requestId>
+    <requests/>
+  </status>
+  <itemUpdateResult>
+    <code>code</code>
+    <errorMessages>
+      <errorMessage>
+        <errorId>errorId</errorId>
+        <fieldId>fieldId</fieldId>
+        <msg>error message</msg>
+        <listIndex>1</listIndex>
+        <listIndex2>2</listIndex2>
+      </errorMessage>
+    </errorMessages>
+    <item>
+      <itemUrl>yyy</itemUrl>
+    </item>
+  </itemUpdateResult>
+</result>
