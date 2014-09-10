@@ -2,6 +2,8 @@
 
 RMS Webservice APIのRubyラッパーです。
 
+[![Build Status](https://travis-ci.org/kamiya54/rms_web_service.svg)](https://travis-ci.org/kamiya54/rms_web_service)
+
 #### ご注意
 
 * 楽天市場出品者用APIです。
