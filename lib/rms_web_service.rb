@@ -7,14 +7,21 @@ RWS = RmsWebService
 module RmsWebService
   Endpoint = "https://api.rms.rakuten.co.jp/es/1.0/"
 
-  def configuration(&block)
-    @configuration ||= Configuration.new
-    block.call @configuration if block_given?
-    return @configuration
-  end
+  @@configuration = Configuration.new
 
+  def configure(&block)
+    block.call @@configuration if block_given?
+  end
+  module_function :configure
+
+  def configuration
+    @@configuration
+  end
   module_function :configuration
 
   class AuthError < StandardError
+  end
+
+  class ParameterError < StandardError
   end
 end

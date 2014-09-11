@@ -6,7 +6,7 @@ describe RmsWebService::Item::Get do
     let(:api) {RmsWebService::Item.get(:item_url => 'test001')}
 
     before do
-      RmsWebService.configuration do |c|
+      RmsWebService.configure do |c|
         c.service_secret = 'dummy_service_secret'
         c.license_key = 'dummy_license_key'
       end
