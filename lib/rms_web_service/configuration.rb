@@ -12,12 +12,4 @@ module RmsWebService
       end
     end
   end
-
-  def configuration(&block)
-    @configuration ||= Configuration.new
-    block.call @configuration if block_given?
-    return @configuration
-  end
-
-  module_function :configuration
 end
