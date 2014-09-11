@@ -58,6 +58,21 @@ module RmsWebService
         request = connection("item/update").post {|req| req.body = xml_object.to_xml}
         return Update.new(request.body)
       end
+
+      def delete(args)
+        xml_object = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+          xml.request do
+            xml.itemDeleteRequest do
+              xml.item do
+                args.each {|key, value| eval("xml.#{key.to_s.camelize(:lower)} '#{value}'")}
+              end
+            end
+          end
+        end
+
+        request = connection("item/delete").post {|req| req.body = xml_object.to_xml}
+        return Delete.new(request.body)
+      end
     end
   end
 end
