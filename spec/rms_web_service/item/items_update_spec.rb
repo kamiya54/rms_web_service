@@ -9,7 +9,7 @@ describe RmsWebService::Item::ItemsUpdate do
     ])}
 
     before do
-      RmsWebService.configuration do |c|
+      RmsWebService.configure do |c|
         c.service_secret = 'dummy_service_secret'
         c.license_key = 'dummy_license_key'
       end

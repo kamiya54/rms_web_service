@@ -6,7 +6,7 @@ describe RmsWebService::Item::Search do
     let(:api) {RmsWebService::Item.search(:item_name => 'test001', :item_price_from => 1)}
 
     before do
-      RmsWebService.configuration do |c|
+      RmsWebService.configure do |c|
         c.service_secret = 'dummy_service_secret'
         c.license_key = 'dummy_license_key'
       end

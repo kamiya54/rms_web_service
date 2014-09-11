@@ -6,12 +6,12 @@ describe RmsWebService::Item::Delete do
     let(:api) {RmsWebService::Item.delete({:item_url => 'test001'})}
 
     before :all do
-      RmsWebService.configuration do |c|
+      RmsWebService.configure do |c|
         c.service_secret = 'dummy_service_secret'
         c.license_key = 'dummy_license_key'
       end
     end
-  
+
     before :each do
       stub_request(:post, "https://api.rms.rakuten.co.jp/es/1.0/item/delete")
       .to_return(:status => 200, body: fixture('delete.xml'))
