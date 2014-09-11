@@ -81,6 +81,25 @@ module RmsWebService
 
         return Search.new(request.body)
       end
+
+      def items_update(args)
+        xml_object = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+          xml.request do
+            xml.itemsUpdateRequest do
+              xml.items do
+                args.each do |item|
+                  xml.item do
+                    item.each {|key, value| eval("xml.#{key.to_s.camelize(:lower)} '#{value}'")}
+                  end
+                end
+              end
+            end
+          end
+        end
+
+        request = connection("items/update").post {|req| req.body = xml_object.to_xml}
+        return ItemsUpdate.new(request.body)
+      end
     end
   end
 end
