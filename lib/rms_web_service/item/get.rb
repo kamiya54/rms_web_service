@@ -1,10 +1,5 @@
 module RmsWebService
   class Item
-    def self.get(args)
-      request = connection('item/get').get {|req| req.params['itemUrl'] = args[:item_url]}
-      return Get.new(request.body)
-    end
-
     class Get
       include Response
       def initialize(xml)

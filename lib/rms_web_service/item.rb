@@ -12,15 +12,94 @@ require 'rms_web_service/item/items_update'
 
 module RmsWebService
   class Item
-    def self.connection(method)
-      connection = Faraday.new(:url => endpoint(method)) do |c|
-        c.adapter Faraday.default_adapter
-        c.headers['Authorization'] = RmsWebService.configuration.encoded_keys
+    class << self
+      def connection(method)
+        connection = Faraday.new(:url => endpoint(method)) do |c|
+          c.adapter Faraday.default_adapter
+          c.headers['Authorization'] = RmsWebService.configuration.encoded_keys
+        end
       end
-    end
 
-    def self.endpoint(method)
-      return Endpoint + method
+      def endpoint(method)
+        return Endpoint + method
+      end
+
+      def get(args)
+        request = connection('item/get').get {|req| req.params['itemUrl'] = args[:item_url]}
+        return Get.new(request.body)
+      end
+
+      def insert(args)
+        xml_object = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+          xml.request do
+            xml.itemInsertRequest do
+              xml.item do
+                args.each {|key, value| eval("xml.#{key.to_s.camelize(:lower)} '#{value}'")}
+              end
+            end
+          end
+        end
+
+        request = connection("item/insert").post {|req| req.body = xml_object.to_xml}
+        return Insert.new(request.body)
+      end
+
+      def update(args)
+        xml_object = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+          xml.request do
+            xml.itemUpdateRequest do
+              xml.item do
+                args.each {|key, value| eval("xml.#{key.to_s.camelize(:lower)} '#{value}'")}
+              end
+            end
+          end
+        end
+
+        request = connection("item/update").post {|req| req.body = xml_object.to_xml}
+        return Update.new(request.body)
+      end
+
+      def delete(args)
+        xml_object = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+          xml.request do
+            xml.itemDeleteRequest do
+              xml.item do
+                args.each {|key, value| eval("xml.#{key.to_s.camelize(:lower)} '#{value}'")}
+              end
+            end
+          end
+        end
+
+        request = connection("item/delete").post {|req| req.body = xml_object.to_xml}
+        return Delete.new(request.body)
+      end
+
+      def search(args)
+        request = connection("item/search").get do |req|
+          args.each {|key, value| req.params["#{key.to_s.camelize(:lower)}"] = args[:"#{key}"]}
+        end
+
+        return Search.new(request.body)
+      end
+
+      def items_update(args)
+        xml_object = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+          xml.request do
+            xml.itemsUpdateRequest do
+              xml.items do
+                args.each do |item|
+                  xml.item do
+                    item.each {|key, value| eval("xml.#{key.to_s.camelize(:lower)} '#{value}'")}
+                  end
+                end
+              end
+            end
+          end
+        end
+
+        request = connection("items/update").post {|req| req.body = xml_object.to_xml}
+        return ItemsUpdate.new(request.body)
+      end
     end
   end
 end
