@@ -34,7 +34,7 @@ Or install it yourself as:
 `RmsWebService.configuration`でサービスIDとライセンスキーを設定できます。各キーはRMSより発行できます。
 
 ```ruby
-RmsWebService.configuration do |c|
+RmsWebService.configure do |c|
   c.service_secret = "dummy_service_secret"
   c.license_key = "dummy_license_key"
 end
