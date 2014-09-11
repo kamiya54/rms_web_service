@@ -73,6 +73,14 @@ module RmsWebService
         request = connection("item/delete").post {|req| req.body = xml_object.to_xml}
         return Delete.new(request.body)
       end
+
+      def search(args)
+        request = connection("item/search").get do |req|
+          args.each {|key, value| req.params["#{key.to_s.camelize(:lower)}"] = args[:"#{key}"]}
+        end
+
+        return Search.new(request.body)
+      end
     end
   end
 end
