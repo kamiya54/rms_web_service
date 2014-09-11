@@ -2,6 +2,7 @@
 
 RMS Webservice APIのRubyラッパーです。
 
+[![Gem Version](https://badge.fury.io/rb/rms_web_service.svg)](http://badge.fury.io/rb/rms_web_service)
 [![Build Status](https://travis-ci.org/kamiya54/rms_web_service.svg)](https://travis-ci.org/kamiya54/rms_web_service)
 
 #### ご注意
