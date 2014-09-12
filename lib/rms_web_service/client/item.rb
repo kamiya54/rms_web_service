@@ -2,21 +2,21 @@ require 'nokogiri'
 require 'faraday'
 require 'active_support'
 require 'active_support/core_ext'
-require 'rms_web_service/item/response'
-require 'rms_web_service/item/get'
-require 'rms_web_service/item/insert'
-require 'rms_web_service/item/update'
-require 'rms_web_service/item/delete'
-require 'rms_web_service/item/search'
-require 'rms_web_service/item/items_update'
 
 module RmsWebService
-  class Item
-    class << self
+  module Client
+    class Item
+      Endpoint = "https://api.rms.rakuten.co.jp/es/1.0/"
+      attr_accessor :configuration
+
+      def initialize(args={})
+        @configuration = ::RmsWebService::Configuration.new(args)
+      end
+
       def connection(method)
         connection = Faraday.new(:url => endpoint(method)) do |c|
           c.adapter Faraday.default_adapter
-          c.headers['Authorization'] = RmsWebService.configuration.encoded_keys
+          c.headers['Authorization'] = self.configuration.encoded_keys
         end
       end
 
@@ -26,7 +26,7 @@ module RmsWebService
 
       def get(args)
         request = connection('item/get').get {|req| req.params['itemUrl'] = args[:item_url]}
-        return Get.new(request.body)
+        return ::RmsWebService::Response::Item::Get.new(request.body)
       end
 
       def insert(args)
@@ -41,7 +41,7 @@ module RmsWebService
         end
 
         request = connection("item/insert").post {|req| req.body = xml_object.to_xml}
-        return Insert.new(request.body)
+        return ::RmsWebService::Response::Item::Insert.new(request.body)
       end
 
       def update(args)
@@ -56,7 +56,7 @@ module RmsWebService
         end
 
         request = connection("item/update").post {|req| req.body = xml_object.to_xml}
-        return Update.new(request.body)
+        return ::RmsWebService::Response::Item::Update.new(request.body)
       end
 
       def delete(args)
@@ -71,7 +71,7 @@ module RmsWebService
         end
 
         request = connection("item/delete").post {|req| req.body = xml_object.to_xml}
-        return Delete.new(request.body)
+        return ::RmsWebService::Response::Item::Delete.new(request.body)
       end
 
       def search(args)
@@ -79,7 +79,7 @@ module RmsWebService
           args.each {|key, value| req.params["#{key.to_s.camelize(:lower)}"] = args[:"#{key}"]}
         end
 
-        return Search.new(request.body)
+        return ::RmsWebService::Response::Item::Search.new(request.body)
       end
 
       def items_update(args)
@@ -98,9 +98,8 @@ module RmsWebService
         end
 
         request = connection("items/update").post {|req| req.body = xml_object.to_xml}
-        return ItemsUpdate.new(request.body)
+        return ::RmsWebService::Response::Item::ItemsUpdate.new(request.body)
       end
     end
   end
 end
-

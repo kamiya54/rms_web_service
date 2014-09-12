@@ -1,0 +1,6 @@
+require 'rms_web_service/response/item/get'
+require 'rms_web_service/response/item/insert'
+require 'rms_web_service/response/item/update'
+require 'rms_web_service/response/item/delete'
+require 'rms_web_service/response/item/search'
+require 'rms_web_service/response/item/items_update'

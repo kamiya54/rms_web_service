@@ -1,12 +1,11 @@
 require "rms_web_service/version"
 require "rms_web_service/configuration"
-require "rms_web_service/item"
+require "rms_web_service/client"
+require "rms_web_service/response"
 
 RWS = RmsWebService
 
 module RmsWebService
-  Endpoint = "https://api.rms.rakuten.co.jp/es/1.0/"
-
   @@configuration = Configuration.new
 
   def configure(&block)

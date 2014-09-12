@@ -31,32 +31,29 @@ Or install it yourself as:
 
 現在、itemAPIのみサポートしています。パラメータについては公式ドキュメントを参照してください。
 
-`RmsWebService.configuration`でサービスIDとライセンスキーを設定できます。各キーはRMSより発行できます。
+サービスIDとライセンスキーを設定したクライアントインスタンスを生成します。各キーはRMSより発行できます。
 
 ```ruby
-RmsWebService.configure do |c|
-  c.service_secret = "dummy_service_secret"
-  c.license_key = "dummy_license_key"
-end
+client = RmsWebService::Client::Item.new(service_secret: "dummy_service_secret", license_key: "dummy_license_key")
 ```
 
-### RmsWebService::Item
+### RmsWebService::Client::Item
 
-RmsWebService::ItemがAPIの各メソッドを持っています。パラメータを渡す場合はハッシュ、複数のItemを渡す場合は配列を使用します。
+RmsWebService::Client::ItemのインスタンスがAPIの各メソッドを持っています。パラメータを渡す場合はハッシュ、複数のItemを渡す場合は配列を使用します。
 
-各メソッドが返すインスタンスがどのようなメソッドを持つかは公式ドキュメントを見るのが早いと思います。更新に失敗した場合のみ、`errorMessages`に設定されているエラー関係のメソッドをサポートします。
+各メソッドのレスポンスがどのようなメソッドを持つかは公式ドキュメントをご覧ください。更新に失敗した場合のみ、`errorMessages`に設定されているエラー関係のメソッドをサポートします。
 
 ```ruby
 # item.get
-item = RmsWebService::Item.get(:item_url => "ed-60c-w")
+item = client.get(:item_url => "ed-60c-w")
 p item.item_name # => "ed-60c-w"
 
 # item.update
-item = RmsWebService::Item.update({:item_url => "ed-60c-w", :item_price => 43800})
+item = client.update({:item_url => "ed-60c-w", :item_price => 43800})
 p item.system_status # => "OK"
 
 # item.insert
-item = RmsWebService::Item.insert({
+item = client.insert({
   :item_url => "test001",
   :item_name => "test001",
   :item_price => "100000",
@@ -65,17 +62,17 @@ item = RmsWebService::Item.insert({
 p item.system_status # => "OK"
 
 # item.delete
-item = RmsWebService::Item.delete(:item_url => "test001")
+item = client.delete(:item_url => "test001")
 p item.system_status # => "OK"
 
 # item.search
-items = RmsWebService::Item.search(:item_name => "空気清浄機")
+items = client.search(:item_name => "空気清浄機")
 items.each do |item|
   p item.item_name
 end
 
 # items.update
-items = RmsWebService::Item.items_update([
+items = client.items_update([
   {:item_url => "ed-60c-w", :item_price => 43800},
   {:item_url => "noexist", :item_price => 10800}
 ])
