@@ -29,8 +29,8 @@ describe RmsWebService::Client::Item do
 
     it 'should have methods to return parameters of "get" response' do
       expect(api).to be_a RmsWebService::Response::Item::Get
+      expect(api.status).to be_a RmsWebService::Response::Item::Status
       expect(api.respond_to?(:code)).to be_truthy
-      expect(api.respond_to?(:system_status)).to be_truthy
       expect(api.respond_to?(:item_url)).to be_truthy
     end
   end
@@ -44,8 +44,8 @@ describe RmsWebService::Client::Item do
 
     it 'should have methods to return parameters of "delete" response' do
       expect(api).to be_a RmsWebService::Response::Item::Delete
+      expect(api.status).to be_a RmsWebService::Response::Item::Status
       expect(api.respond_to?(:code)).to be_truthy
-      expect(api.respond_to?(:system_status)).to be_truthy
       expect(api.respond_to?(:item_url)).to be_truthy
     end
   end
@@ -63,8 +63,8 @@ describe RmsWebService::Client::Item do
 
     it 'should have methods to return parameters of "insert" response' do
       expect(api).to be_a RmsWebService::Response::Item::Insert
+      expect(api.status).to be_a RmsWebService::Response::Item::Status
       expect(api.respond_to?(:code)).to be_truthy
-      expect(api.respond_to?(:system_status)).to be_truthy
       expect(api.respond_to?(:item_url)).to be_truthy
     end
   end
@@ -78,8 +78,8 @@ describe RmsWebService::Client::Item do
 
     it 'should have methods to return parameters of "update" response' do
       expect(api).to be_a RmsWebService::Response::Item::Update
+      expect(api.status).to be_a RmsWebService::Response::Item::Status
       expect(api.respond_to?(:code)).to be_truthy
-      expect(api.respond_to?(:system_status)).to be_truthy
       expect(api.respond_to?(:item_url)).to be_truthy
       expect(api.respond_to?(:error_id)).to be_truthy
     end
@@ -95,8 +95,8 @@ describe RmsWebService::Client::Item do
     it 'should have methods to return parameters of "search" response' do
       expect(api).to be_a RmsWebService::Response::Item::Search
       expect(api[0]).to be_a RmsWebService::Response::Item::Get
+      expect(api.status).to be_a RmsWebService::Response::Item::Status
       expect(api.respond_to?(:code)).to be_truthy
-      expect(api.respond_to?(:system_status)).to be_truthy
       expect(api[0].respond_to?(:item_url)).to be_truthy
     end
   end
@@ -114,7 +114,7 @@ describe RmsWebService::Client::Item do
     it 'should have methods to return parameters of "items.update" response' do
       expect(api).to be_a RmsWebService::Response::Item::ItemsUpdate
       expect(api[0]).to be_a RmsWebService::Response::Item::Update
-      expect(api.respond_to?(:system_status)).to be_truthy
+      expect(api.status).to be_a RmsWebService::Response::Item::Status
       expect(api[0].respond_to?(:item_url)).to be_truthy
       expect(api[0].respond_to?(:code)).to be_truthy
     end

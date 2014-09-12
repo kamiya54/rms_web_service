@@ -1,11 +1,10 @@
 module RmsWebService
   module Response
     module Item
-      class ItemsUpdate < Parser
+      class Status < Parser
         def initialize(xml)
           xml = Nokogiri::XML.parse(xml)
-          xml.xpath("//itemsUpdateResult").children.each {|item| self << Update.new(item.to_xml)}
-          super
+          set_attributes xml.xpath("//status").children
         end
       end
     end
