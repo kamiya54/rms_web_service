@@ -41,16 +41,14 @@ client = RmsWebService::Client::Item.new(service_secret: "dummy_service_secret",
 
 RmsWebService::Client::ItemのインスタンスがAPIの各メソッドを持っています。パラメータを渡す場合はハッシュ、複数のItemを渡す場合は配列を使用します。
 
-各メソッドのレスポンスがどのようなメソッドを持つかは公式ドキュメントをご覧ください。更新に失敗した場合のみ、`errorMessages`に設定されているエラー関係のメソッドをサポートします。
-
 ```ruby
 # item.get
 item = client.get(:item_url => "ed-60c-w")
-p item.item_name # => "ed-60c-w"
+# '.item_name'、'.item_price'等のメソッドを持ちます。属性については公式ドキュメントを見てください。
 
 # item.update
 item = client.update({:item_url => "ed-60c-w", :item_price => 43800})
-p item.system_status # => "OK"
+# '.success?'で成功したかどうかを判別できます。'.errors'でエラー内容を確認できます。
 
 # item.insert
 item = client.insert({
@@ -59,31 +57,22 @@ item = client.insert({
   :item_price => "100000",
   :genre_id => "211889",
 })
-p item.system_status # => "OK"
+# '.success?'で成功したかどうかを判別できます。'.errors'でエラー内容を確認できます。
 
 # item.delete
 item = client.delete(:item_url => "test001")
-p item.system_status # => "OK"
+# '.success?'で成功したかどうかを判別できます。'.errors'でエラー内容を確認できます。
 
 # item.search
 items = client.search(:item_name => "空気清浄機")
-items.each do |item|
-  p item.item_name
-end
+# item.getと同じ性質のインスタンスを要素として持つ配列を返します
 
 # items.update
 items = client.items_update([
   {:item_url => "ed-60c-w", :item_price => 43800},
   {:item_url => "noexist", :item_price => 10800}
 ])
-items.each do |item|
-  if item.code == 'N000'
-    p item.item_url # => "ed-60c-w" 
-  else
-    p item.error_id # => "335"
-    p item.msg # => "商品管理番号欄（商品URL）で指定された商品が見つかりません。更新・変更、削除の場合は、存在する商品の商品管理番号（商品URL）をご指定ください。"
-  end
-end
+# item.updateと同じ性質のインスタンスを要素として持つ配列を返します
 ```
 
 ## Contributing

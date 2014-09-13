@@ -13,9 +13,8 @@
         <code>N000</code>
         <item>
             <itemUrl>aaa</itemUrl>
-            ・
-            ・
-            ・
+            <itemName>test</itemName>
+            <itemPrice>1000</itemPrice>
         </item>
     </itemGetResult>
 </result>
