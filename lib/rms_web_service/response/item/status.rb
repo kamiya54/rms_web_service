@@ -3,8 +3,7 @@ module RmsWebService
     module Item
       class Status < Parser
         def initialize(xml)
-          xml = Nokogiri::XML.parse(xml)
-          set_attributes xml.xpath("//status").children
+          set_attributes Nokogiri::XML.parse(xml).xpath("//status").children
         end
       end
     end

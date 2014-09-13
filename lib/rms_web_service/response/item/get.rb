@@ -4,10 +4,8 @@ module RmsWebService
       class Get < Parser
         attr_accessor :code
         def initialize(xml)
-          xml = Nokogiri::XML.parse(xml)
-          set_attributes xml.xpath("//item").children
-          @code = xml.xpath("//code").first.content if xml.xpath("//code").present?
           super
+          set_attributes @parsed_xml.xpath("//item").children
         end
 
         def success?

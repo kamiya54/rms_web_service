@@ -3,8 +3,7 @@ module RmsWebService
     module Item
       class Error < Parser
         def initialize(xml)
-          xml = Nokogiri::XML.parse(xml)
-          set_attributes xml.xpath("//errorMessage").children
+          set_attributes Nokogiri::XML.parse(xml).xpath("//errorMessage").children
         end
       end
     end
