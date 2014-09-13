@@ -9,6 +9,10 @@ module RmsWebService
           @code = xml.xpath("//code").first.content if xml.xpath("//code").present?
           super
         end
+
+        def success?
+          return @code == "N000" ? true : false
+        end
       end
     end
   end
