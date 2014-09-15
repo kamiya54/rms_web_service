@@ -13,7 +13,7 @@ module RmsWebService
         raise RmsWebService::ParameterError, 'service_secret is required' unless service_secret.present?
         raise RmsWebService::ParameterError, 'license_key is required' unless license_key.present?
 
-        "ESA " + Base64.encode64(service_secret + ":" + license_key).chomp
+        "ESA " + Base64.encode64(service_secret + ":" + license_key).gsub("\n", "")
     end
   end
 end

@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe RmsWebService::Configuration do
   let(:config){ described_class.new(service_secret: service_secret, license_key: license_key) }
-  let(:service_secret){ "dummy_service_secret" }
-  let(:license_key){ "dummy_license_key" }
+  let(:service_secret){ "dummy_service_secret_ssss" }
+  let(:license_key){ "dummy_license_key_sssssss" }
+  # Actual string is 25 characters.
 
   describe "#service_secret" do
     subject{ config.service_secret }
@@ -19,11 +20,12 @@ describe RmsWebService::Configuration do
     context "with service_secret and license_key" do
       let(:encoded_string){
         encoded_credentials = Base64.encode64("#{service_secret}:#{license_key}")
-        "ESA #{encoded_credentials}".chomp
+        "ESA #{encoded_credentials}".gsub("\n", "")
       }
 
       subject{ config.encoded_keys }
       it { is_expected.to eq(encoded_string) }
+      it { is_expected.not_to include("\n") }
     end
 
     context "without service_secret" do
