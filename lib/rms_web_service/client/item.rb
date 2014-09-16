@@ -25,8 +25,8 @@ module RmsWebService
         @endpoint || Endpoint + method
       end
 
-      def get(args)
-        request = connection('item/get').get {|req| req.params['itemUrl'] = args[:item_url]}
+      def get(item_url)
+        request = connection('item/get').get {|req| req.params['itemUrl'] = item_url }
         return ::RmsWebService::Response::Item::Get.new(request.body)
       end
 
@@ -60,12 +60,12 @@ module RmsWebService
         return ::RmsWebService::Response::Item::Update.new(request.body)
       end
 
-      def delete(args)
+      def delete(item_url)
         xml_object = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
           xml.request do
             xml.itemDeleteRequest do
               xml.item do
-                args.each {|key, value| eval("xml.#{key.to_s.camelize(:lower)} '#{value}'")}
+                xml.itemUrl item_url
               end
             end
           end

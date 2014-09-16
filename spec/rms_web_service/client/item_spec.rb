@@ -39,7 +39,7 @@ describe RmsWebService::Client::Item do
       stub_request(:get, "https://api.rms.rakuten.co.jp/es/1.0/item/get?itemUrl=test001")
       .to_return(:status => 200, body: fixture('get.xml'))
     end
-    subject {client.get(:item_url => 'test001')}
+    subject {client.get('test001')}
     it {is_expected.to be_a RWS::Response::Item::Get}
   end
 
@@ -48,7 +48,7 @@ describe RmsWebService::Client::Item do
       stub_request(:post, "https://api.rms.rakuten.co.jp/es/1.0/item/delete")
       .to_return(:status => 200, body: fixture('delete.xml'))
     end
-    subject {client.delete(:item_url => 'test001')}
+    subject {client.delete('test001')}
     it {is_expected.to be_a RWS::Response::Item::Delete}
   end
 
