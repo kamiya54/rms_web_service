@@ -39,18 +39,18 @@ client = RmsWebService::Client::Item.new(service_secret: "dummy_service_secret",
 
 ### RmsWebService::Client::Item
 
-RmsWebService::Client::ItemのインスタンスがAPIの各メソッドを持っています。パラメータを渡す場合はハッシュ、複数のItemを渡す場合は配列を使用します。
+RmsWebService::Client::ItemのインスタンスがAPIの各メソッドを持っています。各メソッドへのパラメータの渡し方は下記の通りです。
 
 ```ruby
-# item.get
-item = client.get(:item_url => "ed-60c-w")
+item = client.get("ed-60c-w")
 # '.item_name'、'.item_price'等のメソッドを持ちます。属性については公式ドキュメントを見てください。
 
-# item.update
+item = client.delete("test001")
+# '.success?'で成功したかどうかを判別できます。'.errors'でエラー内容を確認できます。
+
 item = client.update({:item_url => "ed-60c-w", :item_price => 43800})
 # '.success?'で成功したかどうかを判別できます。'.errors'でエラー内容を確認できます。
 
-# item.insert
 item = client.insert({
   :item_url => "test001",
   :item_name => "test001",
@@ -59,15 +59,9 @@ item = client.insert({
 })
 # '.success?'で成功したかどうかを判別できます。'.errors'でエラー内容を確認できます。
 
-# item.delete
-item = client.delete(:item_url => "test001")
-# '.success?'で成功したかどうかを判別できます。'.errors'でエラー内容を確認できます。
-
-# item.search
 items = client.search(:item_name => "空気清浄機")
 # item.getと同じ性質のインスタンスを要素として持つ配列を返します
 
-# items.update
 items = client.items_update([
   {:item_url => "ed-60c-w", :item_price => 43800},
   {:item_url => "noexist", :item_price => 10800}
