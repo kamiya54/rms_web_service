@@ -5,6 +5,8 @@ describe RmsWebService::Client::Item do
   subject(:client) {described_class.new(:service_secret => service_secret, :license_key => license_key)}
   let(:service_secret) {'dummy_service_secret'}
   let(:license_key) {'dummy_license_key'}
+  let(:default_url) {"https://api.rms.rakuten.co.jp/es/1.0/"}
+  let(:specified_url) {"https://example.com/"}
 
   describe '.new' do
     it { is_expected.to be_a RmsWebService::Client::Item }
@@ -18,6 +20,18 @@ describe RmsWebService::Client::Item do
   describe '.connection' do
     subject {client.connection("item/get")}
     it { is_expected.to be_a Faraday::Connection }
+  end
+
+  describe '.endpoint' do
+    context 'default URL' do
+      subject {client.endpoint("item/get")}
+      it { is_expected.to eq default_url + "item/get"}
+    end
+    context 'specify URL' do
+      let(:api) {described_class.new(:service_secret => service_secret, :license_key => license_key, :endpoint => specified_url)}
+      subject {api.endpoint("item/get")}
+      it { is_expected.to eq specified_url}
+    end
   end
 
   describe '.get' do

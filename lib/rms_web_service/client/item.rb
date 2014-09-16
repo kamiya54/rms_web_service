@@ -11,6 +11,7 @@ module RmsWebService
 
       def initialize(args={})
         @configuration = ::RmsWebService::Configuration.new(args)
+        @endpoint = args[:endpoint]
       end
 
       def connection(method)
@@ -21,7 +22,7 @@ module RmsWebService
       end
 
       def endpoint(method)
-        return Endpoint + method
+        @endpoint || Endpoint + method
       end
 
       def get(args)
