@@ -9,3 +9,6 @@ end
 def fixture(file)
   File.new(File.join(fixture_path, file))
 end
+
+require 'coveralls'
+Coveralls.wear!
