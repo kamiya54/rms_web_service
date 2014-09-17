@@ -4,12 +4,14 @@ RMS Webservice APIのRubyラッパーです。
 
 [![Gem Version](https://badge.fury.io/rb/rms_web_service.svg)](http://badge.fury.io/rb/rms_web_service)
 [![Build Status](https://travis-ci.org/kamiya54/rms_web_service.svg)](https://travis-ci.org/kamiya54/rms_web_service)
+[![Coverage Status](https://coveralls.io/repos/kamiya54/rms_web_service/badge.png)](https://coveralls.io/r/kamiya54/rms_web_service)
+[![Code Climate](https://codeclimate.com/github/kamiya54/rms_web_service/badges/gpa.svg)](https://codeclimate.com/github/kamiya54/rms_web_service)
 
 #### ご注意
 
-* 楽天市場出品者用APIです。
+* 楽天市場出店者のみが利用できるAPIです。
 * 現在一部機能のみサポートしています。
-* 公式のものではありません。個人が作っているものですので、ご利用は自己責任でお願いします。
+* 非公式です。
 
 ## Installation
 
