@@ -9,7 +9,7 @@
   </status>
   <itemUpdateResult>
     <code>code</code>
-    <errorMessages><errorMessage><errorId>errorId</errorId><fieldId>fieldId</fieldId><msg>error message</msg><listIndex>1</listIndex><listIndex2>2</listIndex2></errorMessage></errorMessages>
+    <errorMessages><errorMessage><errorId>errorId</errorId><fieldId>503</fieldId><msg>error message</msg><listIndex>1</listIndex><listIndex2>2</listIndex2></errorMessage></errorMessages>
     <item>
       <itemUrl>yyy</itemUrl>
     </item>
