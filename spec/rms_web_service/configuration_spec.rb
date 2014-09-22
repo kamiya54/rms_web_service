@@ -19,8 +19,8 @@ describe RmsWebService::Configuration do
   describe "#encoded_keys" do
     context "with service_secret and license_key" do
       let(:encoded_string){
-        encoded_credentials = Base64.encode64("#{service_secret}:#{license_key}")
-        "ESA #{encoded_credentials}".gsub("\n", "")
+        encoded_credentials = Base64.strict_encode64("#{service_secret}:#{license_key}")
+        "ESA #{encoded_credentials}"
       }
 
       subject{ config.encoded_keys }
