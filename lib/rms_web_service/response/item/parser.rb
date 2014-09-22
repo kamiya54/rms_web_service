@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 module RmsWebService
   module Response
     module Item
