@@ -9,6 +9,7 @@
 /tmp/
 *.bundle
 *.so
+*.swp
 *.o
 *.a
 mkmf.log
