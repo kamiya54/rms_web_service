@@ -12,7 +12,7 @@ module RmsWebService
             hash.store("field", ::FIELDID_LIST["#{hash['field_id']}"][0].underscore)
             hash.store("field_name", ::FIELDID_LIST["#{hash['field_id']}"][1].underscore)
           end
-          return hash
+          hash
         end
       end
     end

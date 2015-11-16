@@ -18,7 +18,7 @@ module RmsWebService
         end
 
         def set_attribute(name, content)
-          self.define_singleton_method(name.underscore) {content}
+          define_singleton_method(name.underscore) {content}
         end
       end
     end

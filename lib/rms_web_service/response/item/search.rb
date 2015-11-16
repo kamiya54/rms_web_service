@@ -9,7 +9,7 @@ module RmsWebService
         end
 
         def success?
-          return @code == "200-00" ? true : false
+          @code == "200-00" ? true : false
         end
       end
     end
